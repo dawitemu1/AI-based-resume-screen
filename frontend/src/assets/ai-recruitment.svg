@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="aiGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a78bfa;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="brainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4B0082;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Brain-like circuit pattern -->
+  <path d="M100,30 C120,25 140,35 150,50 C160,65 160,85 150,100 C140,115 120,125 100,130 C80,125 60,115 50,100 C40,85 40,65 50,50 C60,35 80,25 100,30 Z" 
+        fill="url(#brainGradient)" opacity="0.8"/>
+  
+  <!-- Neural connections -->
+  <path d="M70,60 Q90,50 110,60" stroke="#A67C00" stroke-width="2" fill="none"/>
+  <path d="M110,60 Q130,70 120,90" stroke="#A67C00" stroke-width="2" fill="none"/>
+  <path d="M120,90 Q100,100 80,90" stroke="#A67C00" stroke-width="2" fill="none"/>
+  <path d="M80,90 Q70,70 70,60" stroke="#A67C00" stroke-width="2" fill="none"/>
+  <path d="M90,75 Q100,85 110,75" stroke="#A67C00" stroke-width="2" fill="none"/>
+  
+  <!-- Central AI core -->
+  <circle cx="100" cy="85" r="15" fill="url(#aiGradient)"/>
+  
+  <!-- Animated particles -->
+  <circle cx="100" cy="40" r="3" fill="#A67C00" opacity="0.8">
+    <animate attributeName="cy" values="40;130;40" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.8;0.2;0.8" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  
+  <circle cx="140" cy="60" r="2" fill="#A67C00" opacity="0.7">
+    <animate attributeName="cx" values="140;60;140" dur="4s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.7;0.3;0.7" dur="4s" repeatCount="indefinite"/>
+  </circle>
+  
+  <circle cx="60" cy="110" r="2.5" fill="#A67C00" opacity="0.6">
+    <animate attributeName="cy" values="110;60;110" dur="5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.6;0.2;0.6" dur="5s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- User and job icons -->
+  <circle cx="40" cy="40" r="8" fill="#4B2E00" opacity="0.9"/>
+  <rect x="35" y="35" width="10" height="10" rx="2" fill="white"/>
+  <circle cx="40" cy="35" r="3" fill="#4B2E00"/>
+  
+  <path d="M160,160 L170,150 L180,160 L175,170 L165,170 Z" fill="#4B2E00" opacity="0.9"/>
+  <rect x="165" y="160" width="10" height="15" fill="white"/>
+</svg>

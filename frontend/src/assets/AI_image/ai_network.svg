@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="networkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4B0082;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="nodeGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" style="stop-color:#A67C00;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Network nodes -->
+  <circle cx="50" cy="50" r="15" fill="url(#nodeGradient)">
+    <animate attributeName="r" values="15;18;15" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  
+  <circle cx="150" cy="50" r="15" fill="url(#nodeGradient)">
+    <animate attributeName="r" values="15;12;15" dur="2.5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.8;0.6;0.8" dur="2.5s" repeatCount="indefinite"/>
+  </circle>
+  
+  <circle cx="100" cy="100" r="20" fill="url(#networkGradient)">
+    <animate attributeName="r" values="20;23;20" dur="1.8s" repeatCount="indefinite"/>
+  </circle>
+  
+  <circle cx="50" cy="150" r="15" fill="url(#nodeGradient)">
+    <animate attributeName="r" values="15;17;15" dur="2.2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.8;1;0.8" dur="2.2s" repeatCount="indefinite"/>
+  </circle>
+  
+  <circle cx="150" cy="150" r="15" fill="url(#nodeGradient)">
+    <animate attributeName="r" values="15;13;15" dur="2.7s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.8;0.5;0.8" dur="2.7s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Connecting lines with moving particles -->
+  <line x1="50" y1="50" x2="150" y2="50" stroke="#4B0082" stroke-width="2"/>
+  <circle cx="50" cy="50" r="3" fill="#A67C00">
+    <animate attributeName="cx" values="50;150;50" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  
+  <line x1="50" y1="50" x2="100" y2="100" stroke="#4B0082" stroke-width="2"/>
+  <circle cx="50" cy="50" r="3" fill="#A67C00">
+    <animate attributeName="cx" values="50;100;50" dur="4s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="50;100;50" dur="4s" repeatCount="indefinite"/>
+  </circle>
+  
+  <line x1="150" y1="50" x2="100" y2="100" stroke="#4B0082" stroke-width="2"/>
+  <circle cx="150" cy="50" r="3" fill="#A67C00">
+    <animate attributeName="cx" values="150;100;150" dur="3.5s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="50;100;50" dur="3.5s" repeatCount="indefinite"/>
+  </circle>
+  
+  <line x1="100" y1="100" x2="50" y2="150" stroke="#4B0082" stroke-width="2"/>
+  <circle cx="100" cy="100" r="3" fill="#A67C00">
+    <animate attributeName="cx" values="100;50;100" dur="2.8s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="100;150;100" dur="2.8s" repeatCount="indefinite"/>
+  </circle>
+  
+  <line x1="100" y1="100" x2="150" y2="150" stroke="#4B0082" stroke-width="2"/>
+  <circle cx="100" cy="100" r="3" fill="#A67C00">
+    <animate attributeName="cx" values="100;150;100" dur="3.2s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="100;150;100" dur="3.2s" repeatCount="indefinite"/>
+  </circle>
+  
+  <line x1="50" y1="150" x2="150" y2="150" stroke="#4B0082" stroke-width="2"/>
+  <circle cx="50" cy="150" r="3" fill="#A67C00">
+    <animate attributeName="cx" values="50;150;50" dur="4.5s" repeatCount="indefinite"/>
+  </circle>
+</svg>

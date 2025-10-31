@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Recruitment Gallery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .gallery-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .gallery-header p {
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .slider-container {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .slider-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .autoplay-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .autoplay-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .autoplay-btn.active {
+            background: rgba(76, 175, 80, 0.8);
+        }
+
+        .slider-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .slider-content {
+            flex: 1;
+            overflow: hidden;
+            height: 400px;
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
+        }
+
+        .slide {
+            min-width: 100%;
+            position: relative;
+            height: 100%;
+        }
+
+        .slide-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 30px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .slide:hover .slide-overlay {
+            transform: translateY(0);
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            transition: all 0.3s ease;
+            margin: 0 15px;
+        }
+
+        .nav-btn:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .dots-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: white;
+            transform: scale(1.3);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #45a049);
+            transition: width 0.5s ease;
+            border-radius: 2px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .info-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .info-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .info-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .info-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-header h1 {
+                font-size: 2rem;
+            }
+            
+            .slider-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .slider-content {
+                height: 250px;
+            }
+            
+            .nav-btn {
+                width: 40px;
+                height: 40px;
+                margin: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery-container">
+        <div class="gallery-header">
+            <h1>AI Recruitment Gallery</h1>
+            <p>Explore our AI-powered recruitment platform through these visual insights</p>
+        </div>
+
+        <div class="slider-container">
+            <div class="slider-header">
+                <h2>AI-Powered Recruitment Gallery</h2>
+                <button class="autoplay-btn active" onclick="toggleAutoPlay()">
+                    <span id="playText">⏸️ Pause</span>
+                </button>
+            </div>
+
+            <div class="slider-wrapper">
+                <button class="nav-btn" onclick="previousSlide()">❮</button>
+                
+                <div class="slider-content">
+                    <div class="slider-track" id="sliderTrack">
+                        <div class="slide">
+                            <img src="AI_images/download.jfif" alt="AI Recruitment 1" class="slide-image" onerror="this.src='https://via.placeholder.com/800x400/4f46e5/ffffff?text=AI+Recruitment+Image+1'">
+                            <div class="slide-overlay">
+                                <h3>AI-Powered Recruitment</h3>
+                                <p>Revolutionizing talent acquisition with artificial intelligence</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="AI_images/images.jfif" alt="AI Recruitment 2" class="slide-image" onerror="this.src='https://via.placeholder.com/800x400/4f46e5/ffffff?text=AI+Recruitment+Image+2'">
+                            <div class="slide-overlay">
+                                <h3>Smart Matching</h3>
+                                <p>Advanced algorithms for perfect candidate-job matching</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="AI_images/images (1).jfif" alt="AI Recruitment 3" class="slide-image" onerror="this.src='https://via.placeholder.com/800x400/4f46e5/ffffff?text=AI+Recruitment+Image+3'">
+                            <div class="slide-overlay">
+                                <h3>Efficient Screening</h3>
+                                <p>Automated resume analysis saves time and improves accuracy</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="AI_images/images (2).jfif" alt="AI Recruitment 4" class="slide-image" onerror="this.src='https://via.placeholder.com/800x400/4f46e5/ffffff?text=AI+Recruitment+Image+4'">
+                            <div class="slide-overlay">
+                                <h3>Data-Driven Insights</h3>
+                                <p>Comprehensive analytics for better hiring decisions</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="AI_images/images (3).jfif" alt="AI Recruitment 5" class="slide-image" onerror="this.src='https://via.placeholder.com/800x400/4f46e5/ffffff?text=AI+Recruitment+Image+5'">
+                            <div class="slide-overlay">
+                                <h3>Seamless Integration</h3>
+                                <p>Easy-to-use platform for modern recruitment needs</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="AI_images/images (4).jfif" alt="AI Recruitment 6" class="slide-image" onerror="this.src='https://via.placeholder.com/800x400/4f46e5/ffffff?text=AI+Recruitment+Image+6'">
+                            <div class="slide-overlay">
+                                <h3>Future of Hiring</h3>
+                                <p>Transform your recruitment process with AI technology</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="nav-btn" onclick="nextSlide()">❯</button>
+            </div>
+
+            <div class="dots-container" id="dotsContainer">
+                <!-- Dots will be generated by JavaScript -->
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="info-icon">🤖</div>
+                <h3>AI-Powered Matching</h3>
+                <p>Advanced algorithms analyze resumes and job descriptions to find perfect matches</p>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-icon">📊</div>
+                <h3>Smart Analytics</h3>
+                <p>Comprehensive scoring system provides detailed insights into candidate compatibility</p>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-icon">⚡</div>
+                <h3>Fast Processing</h3>
+                <p>Instant resume screening saves time and improves recruitment efficiency</p>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-icon">🎯</div>
+                <h3>Precise Results</h3>
+                <p>Semantic similarity analysis ensures accurate candidate-job matching</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentIndex = 0;
+        let isAutoPlay = true;
+        let autoPlayInterval;
+        const totalSlides = 6;
+
+        // Initialize slider
+        function initSlider() {
+            createDots();
+            updateSlider();
+            startAutoPlay();
+        }
+
+        // Create dots
+        function createDots() {
+            const dotsContainer = document.getElementById('dotsContainer');
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'dot';
+                dot.onclick = () => goToSlide(i);
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        // Update slider position and indicators
+        function updateSlider() {
+            const sliderTrack = document.getElementById('sliderTrack');
+            const progressFill = document.getElementById('progressFill');
+            const dots = document.querySelectorAll('.dot');
+
+            sliderTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
+            progressFill.style.width = `${((currentIndex + 1) / totalSlides) * 100}%`;
+
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        // Navigation functions
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlider();
+        }
+
+        function previousSlide() {
+            currentIndex = currentIndex === 0 ? totalSlides - 1 : currentIndex - 1;
+            updateSlider();
+        }
+
+        function goToSlide(index) {
+            currentIndex = index;
+            updateSlider();
+        }
+
+        // Auto-play functionality
+        function startAutoPlay() {
+            if (isAutoPlay) {
+                autoPlayInterval = setInterval(nextSlide, 4000);
+            }
+        }
+
+        function stopAutoPlay() {
+            clearInterval(autoPlayInterval);
+        }
+
+        function toggleAutoPlay() {
+            isAutoPlay = !isAutoPlay;
+            const playText = document.getElementById('playText');
+            const autoPlayBtn = document.querySelector('.autoplay-btn');
+
+            if (isAutoPlay) {
+                playText.textContent = '⏸️ Pause';
+                autoPlayBtn.classList.add('active');
+                startAutoPlay();
+            } else {
+                playText.textContent = '▶️ Play';
+                autoPlayBtn.classList.remove('active');
+                stopAutoPlay();
+            }
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', initSlider);
+
+        // Pause auto-play when user hovers over slider
+        document.querySelector('.slider-container').addEventListener('mouseenter', () => {
+            if (isAutoPlay) stopAutoPlay();
+        });
+
+        document.querySelector('.slider-container').addEventListener('mouseleave', () => {
+            if (isAutoPlay) startAutoPlay();
+        });
+    </script>
+</body>
+</html>

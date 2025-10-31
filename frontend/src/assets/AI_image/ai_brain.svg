@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="brainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a78bfa;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="pulseGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4B0082;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Brain outline with pulsing animation -->
+  <path d="M100,30 C120,25 140,35 150,50 C160,65 160,85 150,100 C140,115 120,125 100,130 C80,125 60,115 50,100 C40,85 40,65 50,50 C60,35 80,25 100,30 Z" 
+        fill="url(#brainGradient)" opacity="0.9">
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite"/>
+  </path>
+  
+  <!-- Neural connections with moving dots -->
+  <path d="M70,60 Q90,50 110,60" stroke="#A67C00" stroke-width="2" fill="none"/>
+  <circle cx="70" cy="60" r="3" fill="#A67C00">
+    <animate attributeName="cx" values="70;110;70" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="60;60;60" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  
+  <path d="M110,60 Q130,70 120,90" stroke="#A67C00" stroke-width="2" fill="none"/>
+  <circle cx="110" cy="60" r="3" fill="#A67C00">
+    <animate attributeName="cx" values="110;120;110" dur="4s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="60;90;60" dur="4s" repeatCount="indefinite"/>
+  </circle>
+  
+  <path d="M120,90 Q100,100 80,90" stroke="#A67C00" stroke-width="2" fill="none"/>
+  <circle cx="120" cy="90" r="3" fill="#A67C00">
+    <animate attributeName="cx" values="120;80;120" dur="3.5s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="90;90;90" dur="3.5s" repeatCount="indefinite"/>
+  </circle>
+  
+  <path d="M80,90 Q70,70 70,60" stroke="#A67C00" stroke-width="2" fill="none"/>
+  <circle cx="80" cy="90" r="3" fill="#A67C00">
+    <animate attributeName="cx" values="80;70;80" dur="2.5s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="90;60;90" dur="2.5s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Central pulsing core -->
+  <circle cx="100" cy="85" r="15" fill="url(#pulseGradient)">
+    <animate attributeName="r" values="15;18;15" dur="1.5s" repeatCount="indefinite"/>
+  </circle>
+</svg>
